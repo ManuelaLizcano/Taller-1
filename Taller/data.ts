@@ -22,9 +22,13 @@ export const series = [
 
   let seriesTable: HTMLElement=document.getElementById("series")!;
   let promedioTable: HTMLElement=document.getElementById("promedio")!;
+  
+
   mostrarDatosSerie(series);
   darPromedioTemp(series);
- 
+
+  
+
   function darPromedioTemp(allSeries:Serie[]): void{
     let totalTemp:number=0;
     let totalSeries:number=0;
@@ -45,13 +49,39 @@ export const series = [
     allSeries.forEach((serie)=>{
         let trElement: HTMLElement=document.createElement("tr");
         trElement.innerHTML=`<td>${serie.id}</td>
-        <td><p><font color="blue">${serie.name}</font></p></td>
+        <td><p><font color="blue"><a href="#" onclick="serieDetail(series[${serie.id}-1])">${serie.name}</a></font></p></td>
         <td>${serie.channel}</td>
         <td>${serie.seasons}</td>`;
         seriesTable.appendChild(trElement);
     });
 
+   function serieDetail(serie:Serie){
+    const info=document.getElementById('detail');
+    if(info){
+        const card= `<div class="card">
+                        <img src=${serie.photo} class=card-img-top>
+                        <div class="card-body">
+                        <h3 class="card-title">${serie.name}</h3>
+                        <p class="class-text">${serie.summary}</p>
+                        <a href="${serie.link}">${serie.link}</a>
+                        </div>
+                    </div>`;
+        info.innerHTML=card;
+    }
+}
 
+const nameSerie=document.querySelectorAll('#series td:nth-child(2)');
+
+nameSerie.forEach((nombre, i)=>{
+    nombre.addEventListener('click', ()=>{
+        serieDetail(series[i]);
+    });
+});
+    
+
+    
+
+    
     
 
     

@@ -27,7 +27,20 @@ function darPromedioTemp(allSeries) {
 function mostrarDatosSerie(allSeries) {
     allSeries.forEach(function (serie) {
         var trElement = document.createElement("tr");
-        trElement.innerHTML = "<td>".concat(serie.id, "</td>\n        <td><p><font color=\"blue\">").concat(serie.name, "</font></p></td>\n        <td>").concat(serie.channel, "</td>\n        <td>").concat(serie.seasons, "</td>");
+        trElement.innerHTML = "<td>".concat(serie.id, "</td>\n        <td><p><font color=\"blue\"><a href=\"#\" onclick=\"serieDetail(series[").concat(serie.id, "-1])\">").concat(serie.name, "</a></font></p></td>\n        <td>").concat(serie.channel, "</td>\n        <td>").concat(serie.seasons, "</td>");
         seriesTable.appendChild(trElement);
+    });
+    function serieDetail(serie) {
+        var info = document.getElementById('detail');
+        if (info) {
+            var card = "<div class=\"card\">\n                        <img src=".concat(serie.photo, " class=card-img-top>\n                        <div class=\"card-body\">\n                        <h3 class=\"card-title\">").concat(serie.name, "</h3>\n                        <p class=\"class-text\">").concat(serie.summary, "</p>\n                        <a href=\"").concat(serie.link, "\">").concat(serie.link, "</a>\n                        </div>\n                    </div>");
+            info.innerHTML = card;
+        }
+    }
+    var nameSerie = document.querySelectorAll('#series td:nth-child(2)');
+    nameSerie.forEach(function (nombre, i) {
+        nombre.addEventListener('click', function () {
+            serieDetail(series[i]);
+        });
     });
 }
