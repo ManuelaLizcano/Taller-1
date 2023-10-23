@@ -1,5 +1,4 @@
-import { Serie } from "./serie";
-
+import {Serie} from "./serie.js";
 export const series = [
     new Serie (1,"Breaking Bad","AMC", 5,"Set and filmed in Albuquerque, New Mexico, the series tells the story of Walter White, a struggling and depressed high school chemistry teacher who is diagnosed with lung cancer" ,
     "https://www.amc.com/shows/breaking-bad","https://i.imgur.com/GGje0vc.jpg") ,
@@ -19,6 +18,50 @@ export const series = [
     new Serie (6, "A Very English Scandal", "BBC", 2, "A Very English Scandal is a fact-based three-part British television comedy-drama miniseries based on John Preston's book of the same name.",
         "https://www.bbc.co.uk/programmes/p065smy4", "https://i.imgur.com/D4y3DrQ.jpg"),
   ];
+  
 
-  console.log("Manuela Lizcano");
+  let seriesTable: HTMLElement=document.getElementById("series")!;
+  let promedioTable: HTMLElement=document.getElementById("promedio")!;
+  mostrarDatosSerie(series);
+  darPromedioTemp(series);
+ 
+  function darPromedioTemp(allSeries:Serie[]): void{
+    let totalTemp:number=0;
+    let totalSeries:number=0;
+    let resultado:number=0;
+    allSeries.forEach((serie)=>{
+        totalTemp+=serie.seasons;
+        totalSeries+=1;
+    });
+    resultado=totalTemp/totalSeries;
+    let trElement: HTMLElement=document.createElement("tr");
+    trElement.innerHTML=`<td><b>Seasons average</td>${resultado}</b>`
+    promedioTable.appendChild(trElement);
+
+    
+}
+
+  function mostrarDatosSerie(allSeries:Serie[]): void{
+    allSeries.forEach((serie)=>{
+        let trElement: HTMLElement=document.createElement("tr");
+        trElement.innerHTML=`<td>${serie.id}</td>
+        <td><p><font color="blue">${serie.name}</font></p></td>
+        <td>${serie.channel}</td>
+        <td>${serie.seasons}</td>`;
+        seriesTable.appendChild(trElement);
+    });
+
+
+    
+
+    
+
+
+
+
+
+
+}
+
+
    

@@ -1,5 +1,7 @@
 export class Serie{
-    constructor(public numero: number, public nombre: string, public plataforma:string, public temporadas: number, public sinopsis: string, public link:string, public foto: string){
+    constructor(public id:number, public name: string, public channel:String, public seasons: number, public summary: string, public link:string, public photo: string){
 
     }
+
+    
 }
